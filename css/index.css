@@ -1,4 +1,4 @@
-/* --- ESTILOS GENERALES Y DE FONDO --- */
+
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +6,7 @@
 }
 
 body {
-    /* ¡RUTA CORREGIDA! ../ Sube un nivel desde la carpeta /css */
+    /* fondo incial*/
     background-image: url('../img/fondoinicial.png');
     background-size: cover;
     background-position: center;
@@ -87,7 +87,6 @@ body {
     border: 2px solid #fff;
     border-radius: 15px;
     padding: 3px;
-    /* Barra de carga más arriba */
     margin-bottom: 120px; 
 }
 
@@ -110,7 +109,7 @@ body {
     text-align: center;
     padding: 20px;
    font-family: 'Press Start 2P', cursive;
-    font-size: 11px; /* <-- Un poco más pequeño para el texto legal */
+    font-size: 11px; 
     line-height: 1.5;
 }
 

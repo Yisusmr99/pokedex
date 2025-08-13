@@ -23,9 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loadingScreen.style.display = 'flex';
 
         const randomImageNumber = Math.floor(Math.random() * 10) + 1;
-        // ¡RUTA CORREGIDA! El JS está en /js pero el CSS es quien necesita la ruta corregida.
-        // La ruta en JS se calcula desde el HTML, así que 'img/...' está bien.
-        // La corrección clave estaba en el CSS.
+      
         loadingScreen.style.backgroundImage = `url('img/cargando${randomImageNumber}.png')`;
 
         const randomIndex = Math.floor(Math.random() * pokemonFunFacts.length);
