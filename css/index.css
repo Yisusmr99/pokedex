@@ -1,0 +1,129 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* fondo incial*/
+    background-image: url('../img/fondoinicial.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* --- CONTENEDOR Y ELEMENTOS CENTRADOS --- */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.pokemon-logo {
+    width: 400px;
+    z-index: 10;
+    animation: float 4s ease-in-out infinite;
+    transform: translateY(-30px);
+}
+
+.start-button {
+    width: 140px;
+    height: 140px;
+    text-decoration: none;
+    display: block;
+    transition: transform 0.2s ease-out;
+    transform: translateY(-20px);
+}
+
+.start-button img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.start-button:hover {
+    transform: translateY(-20px) scale(1.2);
+    cursor: pointer;
+}
+
+.start-text {
+    color: white;
+    font-family: 'Press+Start+2P', cursive;
+    font-size: 20px;
+    margin-top: 15px;
+    text-shadow: 2px 2px 4px #000;
+}
+
+/* --- ESTILOS PANTALLA DE CARGA --- */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    display: none;
+}
+
+.progress-bar-container {
+    width: 80%;
+    max-width: 600px;
+    height: 25px;
+    background-color: rgba(51, 51, 51, 0.7);
+    border: 2px solid #fff;
+    border-radius: 15px;
+    padding: 3px;
+    margin-bottom: 120px; 
+}
+
+#progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ffd700, #ffac33);
+    border-radius: 10px;
+    transition: width 0.1s linear;
+}
+
+/* --- ESTILOS PARA LAS BARRAS INFERIORES --- */
+#info-bar, .tip-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 20px;
+   font-family: 'Press Start 2P', cursive;
+    font-size: 11px; 
+    line-height: 1.5;
+}
+
+#info-bar {
+    z-index: 900;
+}
+
+.tip-bar {
+    position: absolute;
+}
+
+/* --- ANIMACIÓN FLOTANTE --- */
+@keyframes float {
+    0% {}
+    50% { transform: translateY(-50px); }
+    100% {}
+}
