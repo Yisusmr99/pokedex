@@ -1,49 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/main.css">
-    <title>Pokedex</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pokedex</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/main.css" />
 </head>
 
 <body>
-
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <img src="./img//logo.png" alt="Pokedex Logo" class="navbar-brand">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav flex-wrap" id="options-types">
-                    </ul>
-                </div>
-            </div>
-
-        </nav>
-        <div class="row mt-3">
-            <form class="container-fluid" id="search-form">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Nombre del Pokémon a buscar"
-                        aria-label="Nombre del Pokémon a buscar" aria-describedby="button-search">
-                    <button class="btn btn-primary" type="button" id="button-search">
-                        Buscar
-                    </button>
-                </div>
-            </form>
+  <div class="container">
+    <!-- NAV: Tipos -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <img src="./img/logo.png" alt="Pokedex Logo" class="navbar-brand" style="height:38px" />
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav flex-wrap" id="options-types"></ul>
         </div>
+      </div>
+    </nav>
+
+    <!-- BÚSQUEDA (única y funcional) -->
+    <form class="container-fluid mt-3" id="search-form">
+      <div class="input-group">
+        <input id="search-input" type="text" class="form-control"
+               placeholder="Nombre del Pokémon a buscar" />
+        <button class="btn btn-primary" type="submit" id="button-search">Buscar</button>
+      </div>
+    </form>
+
+    <!-- GRID -->
+    <div id="results" class="row g-3 mt-3"></div>
+
+    <!-- PAGINACIÓN -->
+    <div id="pagination" class="d-flex justify-content-between align-items-center my-4">
+      <button id="prev-page" class="btn btn-outline-secondary btn-sm" disabled>← Anterior</button>
+      <span id="page-info" class="small text-muted">Pág. 1 de 1</span>
+      <button id="next-page" class="btn btn-outline-secondary btn-sm" disabled>Siguiente →</button>
     </div>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
-        crossorigin="anonymous"></script>
-    <script src="./js/api.js"></script>
+  <!-- MODAL DETALLES -->
+  <div class="modal fade" id="pokemonModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 id="modalTitle" class="modal-title"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-4">
+            <div class="col-md-5 text-center">
+              <img id="modalImg" class="img-fluid" alt="pokemon" />
+              <div id="modalTypes" class="mt-2 d-flex flex-wrap gap-2"></div>
+            </div>
+            <div class="col-md-7">
+              <div class="row g-3">
+                <div class="col-6">
+                  <div class="p-2 rounded bg-light">
+                    <div class="text-muted small">Altura</div>
+                    <div id="modalHeight" class="fw-semibold"></div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="p-2 rounded bg-light">
+                    <div class="text-muted small">Peso</div>
+                    <div id="modalWeight" class="fw-semibold"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-3">
+                <div class="text-muted small mb-1">Habilidades</div>
+                <div id="modalAbilities" class="d-flex flex-wrap gap-2"></div>
+              </div>
+              <div class="mt-3">
+                <div class="text-muted small mb-2">Estadísticas base</div>
+                <div id="modalStats" class="d-grid gap-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+          crossorigin="anonymous"></script>
+  <!-- Importa tu app como módulo (no dupliques scripts) -->
+  <script type="module" src="./js/app.js"></script>
 </body>
-
 </html>
