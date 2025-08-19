@@ -62,3 +62,18 @@
 .nav-item {
     animation: fadeIn 0.3s ease forwards;
 }
+
+/* Estilos para el toggle de favoritos */
+.form-switch .form-check-input {
+    width: 3em;
+    height: 1.5em;
+    cursor: pointer;
+    transition: background-position .3s ease-in-out;
+}
+
+.form-switch .form-check-label {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+}
