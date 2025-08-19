@@ -6,7 +6,18 @@
   <title>Pokedex</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
         crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="./css/main.css" />
+  <style>
+    #favButton.active {
+      background-color: #ffc107;
+      border-color: #ffc107;
+    }
+    #favButton.active:hover {
+      background-color: #ffb300;
+      border-color: #ffb300;
+    }
+  </style>
 </head>
 
 <body>
@@ -31,6 +42,12 @@
         <input id="search-input" type="text" class="form-control"
                placeholder="Nombre del Pokémon a buscar" />
         <button class="btn btn-primary" type="submit" id="button-search">Buscar</button>
+      </div>
+      <div class="form-check form-switch mt-2 d-flex align-items-center justify-content-center gap-2">
+        <input class="form-check-input m-0" type="checkbox" role="switch" id="show-favorites">
+        <label class="form-check-label mb-0" for="show-favorites">
+          Mostrar solo favoritos
+        </label>
       </div>
     </form>
 
@@ -58,6 +75,10 @@
             <div class="col-md-5 text-center">
               <img id="modalImg" class="img-fluid" alt="pokemon" />
               <div id="modalTypes" class="mt-2 d-flex flex-wrap gap-2"></div>
+              <button id="favButton" class="btn mt-3">
+                <i class="bi"></i>
+                <span>Agregar a favoritos</span>
+              </button>
             </div>
             <div class="col-md-7">
               <div class="row g-3">

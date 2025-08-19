@@ -1,4 +1,5 @@
 import { state, setState, selectors } from '../state/store.js';
+import { updateFavoriteButton, toggleFavorite, isFavorite } from '../features/favorites.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -28,13 +29,18 @@ export function renderCards(pokemons) {
     const types = p.types.map(t =>
       `<span class="badge rounded-pill me-1" style="background:var(--type-${t.type.name});">${t.type.name.toUpperCase()}</span>`
     ).join('');
+    const favClass = isFavorite(p.name) ? 'text-warning' : 'text-muted';
     col.innerHTML = `
       <div class="card h-100 shadow-sm pokemon-card" data-name="${p.name}" style="cursor:pointer;">
         <div class="ratio ratio-1x1 bg-light">
           <img src="${imgFromSprites(p.sprites)}" class="card-img-top p-3 object-fit-contain" alt="${p.name}"/>
         </div>
         <div class="card-body">
-          <h6 class="card-title mb-2">${titleCase(p.name)} <span class="text-muted">#${p.id}</span></h6>
+          <h6 class="card-title mb-2">
+            ${titleCase(p.name)} 
+            <span class="text-muted">#${p.id}</span>
+            <i class="bi bi-star-fill ${favClass} float-end"></i>
+          </h6>
           <div>${types}</div>
         </div>
       </div>`;
@@ -84,6 +90,19 @@ export function openDetailsModal(p) {
         </div>
       </div>`;
   }).join('');
+
+  // Configurar botón de favoritos
+  updateFavoriteButton(p);
+  const favButton = document.getElementById('favButton');
+  favButton.onclick = () => {
+    toggleFavorite(p);
+    updateFavoriteButton(p);
+    // Re-renderizar las cards para actualizar los íconos
+    if (state.pokemons) {
+      renderCards(state.pokemons);
+      wireCardClicks(name => openDetailsModal(state.pokemons.find(p => p.name === name)));
+    }
+  };
 
   const modal = new bootstrap.Modal(document.getElementById('pokemonModal'));
   modal.show();
