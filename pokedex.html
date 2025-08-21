@@ -100,8 +100,11 @@
                 <div id="modalAbilities" class="d-flex flex-wrap gap-2"></div>
               </div>
               <div class="mt-3">
-                <div class="text-muted small mb-2">Estadísticas base</div>
+                <div class="text-muted small mb-2">Estadísticas base: </div>
                 <div id="modalStats" class="d-grid gap-2"></div>
+              </div>
+              <div class="mt-4">
+                <canvas id="statsChart" height="200"></canvas>
               </div>
             </div>
           </div>
@@ -116,5 +119,8 @@
           crossorigin="anonymous"></script>
   <!-- Importa tu app como módulo (no dupliques scripts) -->
   <script type="module" src="./js/app.js"></script>
+  <!-- Scripts para agregar gráficos-->
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <script type="module" src="./js/ui/chart.js"></script>
 </body>
 </html>

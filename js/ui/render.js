@@ -1,5 +1,6 @@
 import { state, setState, selectors } from '../state/store.js';
 import { updateFavoriteButton, toggleFavorite, isFavorite } from '../features/favorites.js';
+import { renderStatsChart } from './chart.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -80,16 +81,7 @@ export function openDetailsModal(p) {
     `<span class="badge text-bg-light border">${titleCase(a.ability.name)}</span>`
   ).join(' ');
 
-  document.getElementById('modalStats').innerHTML = p.stats.map(s => {
-    const v = s.base_stat, name = titleCase(s.stat.name);
-    return `
-      <div>
-        <div class="d-flex justify-content-between small"><span>${name}</span><span class="text-muted">${v}</span></div>
-        <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="255" aria-valuenow="${v}">
-          <div class="progress-bar" style="width:${Math.min(100,(v/255)*100)}%"></div>
-        </div>
-      </div>`;
-  }).join('');
+  renderStatsChart(p); //Para agregar los stats con char
 
   // Configurar botón de favoritos
   updateFavoriteButton(p);
