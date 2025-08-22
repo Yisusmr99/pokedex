@@ -2,7 +2,13 @@ import { getTypes } from '../services/pokeapi.js';
 
 export async function initTypesBar(containerId, onTypeClick) {
   const ul = document.getElementById(containerId);
-  ul.innerHTML = '<li style="text-align:center;padding:1rem;">Cargando tipos…</li>';
+  ul.innerHTML = `
+    <li style="text-align:center;padding:1rem;">
+      <div class="loading-container">
+        <div class="spinner"></div>
+        <div class="loading-text">Cargando tipos...</div>
+      </div>
+    </li>`;
 
   const types = await getTypes();
   ul.innerHTML = '';

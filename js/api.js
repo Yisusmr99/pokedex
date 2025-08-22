@@ -116,7 +116,13 @@ async function initializeApp() {
         }
 
         // Mostrar indicador de carga
-        optionsTypes.innerHTML = '<li style="text-align: center; padding: 1rem;">Cargando tipos...</li>';
+        optionsTypes.innerHTML = `
+            <li style="text-align: center; padding: 1rem;">
+                <div class="loading-container">
+                    <div class="spinner"></div>
+                    <div class="loading-text">Cargando tipos...</div>
+                </div>
+            </li>`;
 
         // Obtener tipos de la API
         const types = await getTypes();
