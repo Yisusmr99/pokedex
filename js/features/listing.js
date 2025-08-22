@@ -5,7 +5,12 @@ import { getFavorites } from './favorites.js';
 
 export async function loadList() {
   const results = document.getElementById('results');
-  results.innerHTML = `<div class="col-12 py-5 text-center text-muted">Cargando…</div>`;
+  results.innerHTML = `
+    <div class="col-12 py-5 text-center">
+      <div class="spinner"></div>
+      <div class="loading-text">Cargando Pokémon...</div>
+    </div>
+  `;
 
   try {
     let details = [];
